@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -28,6 +28,7 @@ export const HostingWizard = () => {
   const [prompt, setPrompt] = useState("");
   const [suggestions, setSuggestions] = useState<HostingSuggestion[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const resultsRef = useRef<HTMLDivElement>(null);
 
   const getHostingSuggestions = async (userPrompt: string) => {
     setIsLoading(true);
@@ -271,6 +272,18 @@ export const HostingWizard = () => {
     toast.success("Hosting suggestions generated!");
   };
 
+  // Scroll to results when suggestions are updated
+  useEffect(() => {
+    if (suggestions.length > 0 && resultsRef.current) {
+      setTimeout(() => {
+        resultsRef.current?.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'start' 
+        });
+      }, 100);
+    }
+  }, [suggestions]);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!prompt.trim()) {
@@ -378,7 +391,7 @@ export const HostingWizard = () => {
 
       {/* Results */}
       {suggestions.length > 0 && (
-        <div className="space-y-6">
+        <div ref={resultsRef} className="space-y-6">
           <div className="text-center">
             <h2 className="text-2xl font-bold text-foreground mb-2">Recommended Hosting Solutions</h2>
             <p className="text-muted-foreground">Based on your requirements, here are the best options:</p>
