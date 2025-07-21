@@ -38,64 +38,208 @@ export const HostingWizard = () => {
     // Mock hosting suggestions based on keywords in prompt
     const mockSuggestions: HostingSuggestion[] = [];
     
+    // Budget-friendly options
+    if (userPrompt.toLowerCase().includes('cheap') || userPrompt.toLowerCase().includes('budget') || userPrompt.toLowerCase().includes('affordable')) {
+      mockSuggestions.push(
+        {
+          name: "Hostinger",
+          description: "Ultra-affordable shared hosting with excellent value",
+          pros: ["Very cheap", "Free domain", "Good performance", "24/7 support"],
+          cons: ["Limited resources", "Shared environment"],
+          pricing: "$1.99-$8.99/month",
+          bestFor: ["Personal sites", "Small projects", "Beginners"],
+          type: "shared"
+        },
+        {
+          name: "Namecheap",
+          description: "Budget hosting with free website builder",
+          pros: ["Low cost", "Free website builder", "Easy setup", "cPanel included"],
+          cons: ["Basic features", "Limited bandwidth"],
+          pricing: "$1.58-$4.88/month",
+          bestFor: ["Small websites", "First-time users", "Basic blogs"],
+          type: "shared"
+        },
+        {
+          name: "InfinityFree",
+          description: "Completely free hosting with no ads",
+          pros: ["100% free", "No ads", "PHP & MySQL", "Free SSL"],
+          cons: ["Limited resources", "No phone support", "Basic features"],
+          pricing: "Free",
+          bestFor: ["Testing", "Learning", "Small personal sites"],
+          type: "shared"
+        }
+      );
+    }
+    
+    // WordPress hosting
     if (userPrompt.toLowerCase().includes('wordpress') || userPrompt.toLowerCase().includes('blog')) {
-      mockSuggestions.push({
-        name: "WP Engine",
-        description: "Managed WordPress hosting with optimized performance",
-        pros: ["WordPress optimized", "Automatic updates", "Daily backups", "CDN included"],
-        cons: ["More expensive", "WordPress only"],
-        pricing: "$25-$400/month",
-        bestFor: ["WordPress sites", "Content management", "Blogs"],
-        type: "cloud"
-      });
+      mockSuggestions.push(
+        {
+          name: "WP Engine",
+          description: "Premium managed WordPress hosting",
+          pros: ["WordPress optimized", "Automatic updates", "Daily backups", "CDN included"],
+          cons: ["More expensive", "WordPress only"],
+          pricing: "$25-$400/month",
+          bestFor: ["Professional WordPress sites", "High-traffic blogs"],
+          type: "cloud"
+        },
+        {
+          name: "Bluehost",
+          description: "WordPress recommended hosting provider",
+          pros: ["WordPress recommended", "Free domain", "One-click install", "24/7 support"],
+          cons: ["Upselling", "Renewal rates increase"],
+          pricing: "$2.75-$13.95/month",
+          bestFor: ["WordPress beginners", "Small to medium blogs"],
+          type: "shared"
+        }
+      );
     }
     
-    if (userPrompt.toLowerCase().includes('react') || userPrompt.toLowerCase().includes('app')) {
-      mockSuggestions.push({
-        name: "Vercel",
-        description: "Platform for frontend frameworks with edge functions",
-        pros: ["Easy deployment", "Global CDN", "Serverless functions", "Git integration"],
-        cons: ["Limited backend", "Bandwidth limits"],
-        pricing: "Free - $20/month",
-        bestFor: ["React apps", "Next.js", "Static sites"],
-        type: "cloud"
-      });
+    // Frontend/React hosting
+    if (userPrompt.toLowerCase().includes('react') || userPrompt.toLowerCase().includes('frontend') || userPrompt.toLowerCase().includes('static')) {
+      mockSuggestions.push(
+        {
+          name: "Vercel",
+          description: "Platform for frontend frameworks with edge functions",
+          pros: ["Easy deployment", "Global CDN", "Serverless functions", "Git integration"],
+          cons: ["Limited backend", "Bandwidth limits"],
+          pricing: "Free - $20/month",
+          bestFor: ["React apps", "Next.js", "Static sites"],
+          type: "cloud"
+        },
+        {
+          name: "Netlify",
+          description: "Platform for modern web projects",
+          pros: ["Continuous deployment", "Form handling", "Edge functions", "Free tier"],
+          cons: ["Build time limits", "Limited server-side"],
+          pricing: "Free - $19/month",
+          bestFor: ["JAMstack sites", "Static generators", "Frontend apps"],
+          type: "cloud"
+        },
+        {
+          name: "GitHub Pages",
+          description: "Free static site hosting from GitHub",
+          pros: ["Completely free", "Git integration", "Custom domains", "HTTPS"],
+          cons: ["Static only", "Public repos only on free tier"],
+          pricing: "Free",
+          bestFor: ["Documentation", "Portfolios", "Open source projects"],
+          type: "cloud"
+        }
+      );
     }
     
-    if (userPrompt.toLowerCase().includes('enterprise') || userPrompt.toLowerCase().includes('high traffic')) {
-      mockSuggestions.push({
-        name: "AWS",
-        description: "Enterprise cloud platform with comprehensive services",
-        pros: ["Highly scalable", "Global infrastructure", "Enterprise features", "99.99% uptime"],
-        cons: ["Complex setup", "Can be expensive", "Learning curve"],
-        pricing: "Pay-as-you-go",
-        bestFor: ["Enterprise apps", "High traffic", "Complex architectures"],
-        type: "cloud"
-      });
+    // Enterprise/High-traffic
+    if (userPrompt.toLowerCase().includes('enterprise') || userPrompt.toLowerCase().includes('high traffic') || userPrompt.toLowerCase().includes('scalable')) {
+      mockSuggestions.push(
+        {
+          name: "AWS",
+          description: "Enterprise cloud platform with comprehensive services",
+          pros: ["Highly scalable", "Global infrastructure", "Enterprise features", "99.99% uptime"],
+          cons: ["Complex setup", "Can be expensive", "Learning curve"],
+          pricing: "Pay-as-you-go",
+          bestFor: ["Enterprise apps", "High traffic", "Complex architectures"],
+          type: "cloud"
+        },
+        {
+          name: "Google Cloud Platform",
+          description: "Google's enterprise cloud platform",
+          pros: ["AI/ML tools", "Global network", "Kubernetes native", "BigQuery"],
+          cons: ["Complex pricing", "Learning curve"],
+          pricing: "Pay-as-you-go",
+          bestFor: ["AI/ML projects", "Data analytics", "Enterprise apps"],
+          type: "cloud"
+        },
+        {
+          name: "Microsoft Azure",
+          description: "Microsoft's cloud computing platform",
+          pros: ["Enterprise integration", "Hybrid cloud", "AI services", "Global reach"],
+          cons: ["Complex management", "Pricing complexity"],
+          pricing: "Pay-as-you-go",
+          bestFor: ["Enterprise apps", "Microsoft stack", "Hybrid solutions"],
+          type: "cloud"
+        }
+      );
     }
     
-    if (userPrompt.toLowerCase().includes('cheap') || userPrompt.toLowerCase().includes('personal')) {
-      mockSuggestions.push({
-        name: "Hostinger",
-        description: "Budget-friendly shared hosting with good performance",
-        pros: ["Very affordable", "Good performance", "Free domain", "Easy setup"],
-        cons: ["Limited resources", "Shared environment"],
-        pricing: "$1.99-$8.99/month",
-        bestFor: ["Personal sites", "Small projects", "Beginners"],
-        type: "shared"
-      });
+    // VPS/Dedicated hosting
+    if (userPrompt.toLowerCase().includes('vps') || userPrompt.toLowerCase().includes('dedicated') || userPrompt.toLowerCase().includes('control')) {
+      mockSuggestions.push(
+        {
+          name: "DigitalOcean",
+          description: "Simple cloud computing for developers",
+          pros: ["Developer-friendly", "Predictable pricing", "SSD storage", "Good documentation"],
+          cons: ["No managed services", "Technical knowledge required"],
+          pricing: "$4-$960/month",
+          bestFor: ["Developers", "Custom applications", "Full control"],
+          type: "vps"
+        },
+        {
+          name: "Vultr",
+          description: "High-performance SSD cloud servers",
+          pros: ["Fast SSD storage", "Multiple locations", "Hourly billing", "Competitive pricing"],
+          cons: ["No managed support", "Technical setup required"],
+          pricing: "$2.50-$640/month",
+          bestFor: ["Performance apps", "Gaming servers", "Custom setups"],
+          type: "vps"
+        },
+        {
+          name: "Linode",
+          description: "Virtual private servers with excellent support",
+          pros: ["Great support", "Transparent pricing", "High performance", "Developer tools"],
+          cons: ["Technical knowledge needed", "No Windows"],
+          pricing: "$5-$960/month",
+          bestFor: ["Linux applications", "Development", "Small to medium apps"],
+          type: "vps"
+        }
+      );
     }
     
-    if (userPrompt.toLowerCase().includes('ai') || userPrompt.toLowerCase().includes('ml') || userPrompt.toLowerCase().includes('data')) {
-      mockSuggestions.push({
-        name: "Google Cloud Platform",
-        description: "Cloud platform with advanced AI/ML capabilities",
-        pros: ["AI/ML tools", "Big data services", "Global network", "Kubernetes native"],
-        cons: ["Complex pricing", "Steep learning curve"],
-        pricing: "Pay-as-you-go",
-        bestFor: ["AI/ML projects", "Data analytics", "Machine learning"],
-        type: "cloud"
-      });
+    // E-commerce hosting
+    if (userPrompt.toLowerCase().includes('ecommerce') || userPrompt.toLowerCase().includes('shop') || userPrompt.toLowerCase().includes('store')) {
+      mockSuggestions.push(
+        {
+          name: "Shopify",
+          description: "Complete e-commerce platform",
+          pros: ["All-in-one solution", "Payment processing", "Mobile apps", "Themes"],
+          cons: ["Transaction fees", "Limited customization", "Monthly costs"],
+          pricing: "$29-$299/month",
+          bestFor: ["Online stores", "Drop shipping", "Digital products"],
+          type: "cloud"
+        },
+        {
+          name: "WooCommerce (SiteGround)",
+          description: "WordPress e-commerce with optimized hosting",
+          pros: ["WordPress integration", "Customizable", "Many plugins", "Good performance"],
+          cons: ["Requires maintenance", "Security responsibility"],
+          pricing: "$2.99-$14.99/month",
+          bestFor: ["WordPress stores", "Custom e-commerce", "Content + commerce"],
+          type: "shared"
+        }
+      );
+    }
+    
+    // CDN and performance
+    if (userPrompt.toLowerCase().includes('cdn') || userPrompt.toLowerCase().includes('fast') || userPrompt.toLowerCase().includes('performance')) {
+      mockSuggestions.push(
+        {
+          name: "Cloudflare",
+          description: "Global CDN and security platform",
+          pros: ["Global CDN", "DDoS protection", "Free tier", "Performance optimization"],
+          cons: ["Can be complex", "Some features are paid"],
+          pricing: "Free - $200/month",
+          bestFor: ["Performance optimization", "Security", "Global reach"],
+          type: "cdn"
+        },
+        {
+          name: "KeyCDN",
+          description: "High-performance content delivery network",
+          pros: ["Pay-as-you-go", "HTTP/2", "Real-time analytics", "Global network"],
+          cons: ["Technical setup", "No free tier"],
+          pricing: "$0.04/GB",
+          bestFor: ["Media delivery", "API acceleration", "Global content"],
+          type: "cdn"
+        }
+      );
     }
     
     // Default suggestions if no specific keywords found
